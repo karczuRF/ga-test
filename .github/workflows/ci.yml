@@ -63,3 +63,9 @@ jobs:
       - name: Print Output
         id: output
         run: echo "${{ steps.test-action.outputs.time }}"
+
+      - name: Commit manifest
+        id: make-commit
+        run: |
+          git add ./tapplets-registry.manifest.json
+          git commit --message "Prepare release v2.0.0"
