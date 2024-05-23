@@ -58,7 +58,7 @@ jobs:
         uses: ./
         with:
           milliseconds: 2000
-          manifestVersion: 2.0.2
+          manifestVersion: 2.0.3
 
       - name: Print Output
         id: output
@@ -70,4 +70,5 @@ jobs:
           git config --global user.name "karczuRF"
           git config --global user.email "oskar.karcz@rumblefish.pl"
           git add ./tapplets-registry.manifest.json
-          git commit -m "Prepare release v2.0.2"
+          git commit -m "Prepare release v2.0.3"
+          git push
