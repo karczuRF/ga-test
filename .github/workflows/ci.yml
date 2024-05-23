@@ -45,7 +45,7 @@ jobs:
         run: npm run ci-test
 
   test-action:
-    name: GitHub Actions Test
+    name: Registry Test
     runs-on: ubuntu-latest
 
     steps:
@@ -53,11 +53,12 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Test Local Action
+      - name: Test Creating Registry Action
         id: test-action
         uses: ./
         with:
           milliseconds: 2000
+          manifestVersion: 2.0.0
 
       - name: Print Output
         id: output

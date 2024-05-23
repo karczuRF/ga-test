@@ -87,7 +87,7 @@ export function updateRegistry(): void {
   })
 }
 
-export function addTappletToRegistry(): void {
+export function addTappletToRegistry(manifestVersion: string): void {
   // Read the contents of the JSON file
   const registry: TappletsRegistry = JSON.parse(
     fs.readFileSync('./tapplets-registry.manifest.json', 'utf8')
@@ -112,13 +112,14 @@ export function addTappletToRegistry(): void {
   registry.registeredTapplets[tappletToRegister.id] = tappletToRegister
 
   // increment version
-  const parts = registry.manifestVersion.split('.')
-  const major = parseInt(parts[0])
-  const minor = parseInt(parts[1])
-  let patch = parseInt(parts[2])
-  patch = ++patch // Increment the major version
+  // const parts = registry.manifestVersion.split('.')
+  // const major = parseInt(parts[0])
+  // const minor = parseInt(parts[1])
+  // let patch = parseInt(parts[2])
+  // patch = ++patch // Increment the major version
+  // registry.manifestVersion = `${major.toString()}.${minor.toString()}.${patch.toString()}`
 
-  registry.manifestVersion = `${major.toString()}.${minor.toString()}.${patch.toString()}`
+  registry.manifestVersion = manifestVersion
   console.log('manifestVersion: ', registry.manifestVersion)
 
   // // Write the updated JSON data back to the file

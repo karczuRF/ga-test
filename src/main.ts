@@ -19,7 +19,9 @@ export async function run(): Promise<void> {
     core.debug(new Date().toTimeString())
 
     // Add new tapplet to the registry
-    addTappletToRegistry()
+    const ver: string = core.getInput('manifestVersion')
+    addTappletToRegistry(ver)
+    core.info('Registry updated.')
 
     // Set outputs for other workflow steps to use
     core.setOutput('time', new Date().toTimeString())

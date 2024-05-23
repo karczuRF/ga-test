@@ -24967,7 +24967,9 @@ async function run() {
         await (0, wait_1.wait)(parseInt(ms, 10));
         core.debug(new Date().toTimeString());
         // Add new tapplet to the registry
-        (0, registry_1.addTappletToRegistry)();
+        const ver = core.getInput('manifestVersion');
+        (0, registry_1.addTappletToRegistry)(ver);
+        core.info('Registry updated.');
         // Set outputs for other workflow steps to use
         core.setOutput('time', new Date().toTimeString());
     }
@@ -25081,7 +25083,7 @@ function updateRegistry() {
     });
 }
 exports.updateRegistry = updateRegistry;
-function addTappletToRegistry() {
+function addTappletToRegistry(manifestVersion) {
     // Read the contents of the JSON file
     const registry = JSON.parse(fs.readFileSync('./tapplets-registry.manifest.json', 'utf8'));
     const tappletToRegister = {
@@ -25101,12 +25103,13 @@ function addTappletToRegistry() {
     // Add the new field to the JSON data
     registry.registeredTapplets[tappletToRegister.id] = tappletToRegister;
     // increment version
-    const parts = registry.manifestVersion.split('.');
-    const major = parseInt(parts[0]);
-    const minor = parseInt(parts[1]);
-    let patch = parseInt(parts[2]);
-    patch = ++patch; // Increment the major version
-    registry.manifestVersion = `${major.toString()}.${minor.toString()}.${patch.toString()}`;
+    // const parts = registry.manifestVersion.split('.')
+    // const major = parseInt(parts[0])
+    // const minor = parseInt(parts[1])
+    // let patch = parseInt(parts[2])
+    // patch = ++patch // Increment the major version
+    // registry.manifestVersion = `${major.toString()}.${minor.toString()}.${patch.toString()}`
+    registry.manifestVersion = manifestVersion;
     console.log('manifestVersion: ', registry.manifestVersion);
     // // Write the updated JSON data back to the file
     // fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2))
