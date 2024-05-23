@@ -1,0 +1,61 @@
+{
+  "manifestVersion": "1.0.7",
+  "registeredTapplets": {
+    "2": {
+      "id": "2",
+      "metadata": {
+        "packageName": "pkc",
+        "displayName": "dis",
+        "authorName": "a",
+        "authorWebsite": "aa",
+        "aboutSummary": "summ",
+        "aboutDescription": "descr",
+        "category": "meme",
+        "imageId": 0
+      },
+      "versions": "0.1.2"
+    },
+    "3": {
+      "id": "3",
+      "metadata": {
+        "packageName": "dupa",
+        "displayName": "dis",
+        "authorName": "a",
+        "authorWebsite": "aa",
+        "aboutSummary": "summ",
+        "aboutDescription": "descr",
+        "category": "meme",
+        "imageId": 0
+      },
+      "versions": "3.0.0"
+    },
+    "4": {
+      "id": "4",
+      "metadata": {
+        "packageName": "dupa",
+        "displayName": "dis",
+        "authorName": "a",
+        "authorWebsite": "aa",
+        "aboutSummary": "summ",
+        "aboutDescription": "descr",
+        "category": "meme",
+        "imageId": 0
+      },
+      "versions": "3.0.0"
+    },
+    "tstTapp": {
+      "id": "1",
+      "metadata": {
+        "packageName": "pkc",
+        "displayName": "dis",
+        "authorName": "a",
+        "authorWebsite": "aa",
+        "aboutSummary": "summ",
+        "aboutDescription": "descr",
+        "category": "meme",
+        "imageId": 0
+      },
+      "versions": "0.1.0"
+    }
+  }
+}
