@@ -67,5 +67,7 @@ jobs:
       - name: Commit manifest
         id: make-commit
         run: |
+          git config --global user.name "karczuRF"
+          git config --global user.email "oskar.karcz@rumblefish.pl"
           git add ./tapplets-registry.manifest.json
-          git commit --message "Prepare release v2.0.0"
+          git commit -m "Prepare release v2.0.2"
