@@ -1,17 +1,12 @@
 import * as fs from 'fs'
 import { writeFile } from 'fs'
 import {
-  pattern,
-  size,
   object,
-  array,
   record,
   string,
-  union,
   optional,
   enums,
   refine,
-  boolean,
   number,
   Infer
 } from 'superstruct'
@@ -117,15 +112,14 @@ export function addTappletToRegistry(): void {
   registry.registeredTapplets[tappletToRegister.id] = tappletToRegister
 
   // increment version
-  let parts = registry.manifestVersion.split('.')
-  let major = parseInt(parts[0])
-  let minor = parseInt(parts[1])
+  const parts = registry.manifestVersion.split('.')
+  const major = parseInt(parts[0])
+  const minor = parseInt(parts[1])
   let patch = parseInt(parts[2])
   patch = ++patch // Increment the major version
 
-  registry.manifestVersion =
-    major.toString() + '.' + minor.toString() + '.' + patch.toString()
-  console.log('manifestVersion: ', registry.manifestVersion) // Output: "2.0.0"
+  registry.manifestVersion = `${major.toString()}.${minor.toString()}.${patch.toString()}`
+  console.log('manifestVersion: ', registry.manifestVersion)
 
   // // Write the updated JSON data back to the file
   // fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2))
