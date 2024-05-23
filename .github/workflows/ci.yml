@@ -58,7 +58,7 @@ jobs:
         uses: ./
         with:
           milliseconds: 2000
-          manifestVersion: 2.0.1
+          manifestVersion: 2.0.2
 
       - name: Print Output
         id: output
