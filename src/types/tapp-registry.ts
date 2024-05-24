@@ -6,7 +6,6 @@ import {
   optional,
   enums,
   refine,
-  number,
   Infer,
   pattern,
   array,
