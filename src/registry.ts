@@ -1,91 +1,7 @@
 import * as fs from 'fs'
 import { writeFile } from 'fs'
-import {
-  object,
-  record,
-  string,
-  optional,
-  enums,
-  refine,
-  number,
-  Infer
-} from 'superstruct'
-
-// For now, validate that each snap is using an NPM id.
-const NpmIdStruct = refine(string(), 'Npm ID', value =>
-  value.startsWith('npm:')
-)
-
-// TODO finish types
-export const RegisteredTappletStruct = object({
-  id: NpmIdStruct,
-  metadata: object({
-    packageName: string(),
-    displayName: string(),
-    authorName: string(),
-    authorWebsite: string(),
-    aboutSummary: string(),
-    aboutDescription: string(),
-    imageId: optional(number()),
-    category: optional(enums(['test', 'defi', 'gamefi', 'meme']))
-    // type: optional(enums(['account'])),
-    // website: optional(string()),
-    // onboard: optional(boolean()),
-    // summary: optional(string()),
-    // description: optional(string()),
-    // audits: optional(array(AuditStruct)),
-    // tags: optional(array(string())),
-    // support: optional(SupportStruct),
-    // sourceCode: optional(string()),
-    // hidden: optional(boolean()),
-    // privateCode: optional(boolean()),
-    // privacyPolicy: optional(string()),
-    // termsOfUse: optional(string()),
-    // additionalSourceCode: optional(array(AdditionalSourceCodeStruct)),
-    // screenshots: optional(size(array(ImagePathStruct), 3, 3))
-  }),
-  versions: string()
-})
-
-export const TappletRegistryStruct = object({
-  manifestVersion: string(),
-  registeredTapplets: record(NpmIdStruct, RegisteredTappletStruct)
-})
-
-export type RegisteredTapplet = Infer<typeof RegisteredTappletStruct>
-export type TappletsRegistry = Infer<typeof TappletRegistryStruct>
-
-export function updateRegistry(): void {
-  const tapplet: RegisteredTapplet = {
-    id: '1',
-    metadata: {
-      packageName: 'pkc',
-      displayName: 'dis',
-      authorName: 'a',
-      authorWebsite: 'aa',
-      aboutSummary: 'summ',
-      aboutDescription: 'descr',
-      category: 'meme',
-      imageId: 0
-    },
-    versions: '0.1.0'
-  }
-
-  const registryData: TappletsRegistry = {
-    manifestVersion: '1.0.0',
-    registeredTapplets: {
-      tstTapp: tapplet
-    }
-  }
-
-  const jsonData = JSON.stringify(registryData, null, 2)
-  console.log('Update registry json', jsonData)
-
-  return writeFile('tapplets-registry.manifest.json', jsonData, err => {
-    if (err) throw err
-    console.log('The file has been saved!')
-  })
-}
+import { RegisteredTapplet, TappletsRegistry } from './types/tapp-registry'
+import { SemVerVersion } from '@metamask/utils'
 
 export function addTappletToRegistry(manifestVersion: string): void {
   // Read the contents of the JSON file
@@ -94,18 +10,31 @@ export function addTappletToRegistry(manifestVersion: string): void {
   )
 
   const tappletToRegister: RegisteredTapplet = {
-    id: '4',
+    id: '@MCozhusheck/tapplet-example',
     metadata: {
-      packageName: 'dupa',
-      displayName: 'dis',
-      authorName: 'a',
-      authorWebsite: 'aa',
-      aboutSummary: 'summ',
-      aboutDescription: 'descr',
-      category: 'meme',
-      imageId: 0
+      packageName: 'tapp-example',
+      displayName: 'Example tapplet to test the registry',
+      author: {
+        name: 'Author Name',
+        website: ''
+      },
+      audits: [
+        {
+          auditor: 'Auditor Name',
+          report: 'report url'
+        }
+      ],
+      category: 'test',
+      logoPath: 'src/tapplets/@MCozhusheck/tapplet-example/assets/logo.svg'
     },
-    versions: '3.0.0'
+    versions: {
+      ['0.0.2' as SemVerVersion]: {
+        integrity:
+          'sha512-ivQM1oWaCaZrHARDCD2rib/RFmNDdSDuCQofOsEc3HLo/zgGjLXiySwm/uu3s/5lt9S+/oPC6wFE3m5agzdizA==',
+        registryUrl:
+          'https://registry.npmjs.org/tapplet-example/-/tapplet-example-0.0.2.tgz'
+      }
+    }
   }
 
   // Add the new field to the JSON data
@@ -125,7 +54,8 @@ export function addTappletToRegistry(manifestVersion: string): void {
   // // Write the updated JSON data back to the file
   // fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2))
   const jsonData = JSON.stringify(registry, null, 2)
-  console.log('Tapplet added to the registry json', jsonData)
+  console.log('Tapplet added to the registry')
+  console.log(jsonData)
 
   return writeFile('tapplets-registry.manifest.json', jsonData, err => {
     if (err) throw err
@@ -135,3 +65,4 @@ export function addTappletToRegistry(manifestVersion: string): void {
 
 // Usage example
 // addFieldToJsonFile('data.json', 'newField', 'newValue')
+addTappletToRegistry('0.0.1')
