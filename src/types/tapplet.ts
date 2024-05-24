@@ -37,12 +37,13 @@ export const LocationStruct = object({
   registry: string()
 })
 export const SourceStruct = object({
-  location: record(string(), LocationStruct)
+  location: record(enums(['npm']), LocationStruct)
 })
 
-export const RegisteredTappletStruct = object({
+export const TappletCandidateStruct = object({
   packageName: string(),
-  versions: string(),
+  displayName: string(),
+  version: string(),
   status: optional(enums(['WIP', 'MVP', 'PROD'])),
   about: AboutStruct,
   design: DesignStruct,
@@ -50,4 +51,4 @@ export const RegisteredTappletStruct = object({
   source: SourceStruct,
   manifestVersion: VersionStruct
 })
-export type RegisteredTapplet = Infer<typeof RegisteredTappletStruct>
+export type TappletCandidate = Infer<typeof TappletCandidateStruct>

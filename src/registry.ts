@@ -2,18 +2,25 @@ import * as fs from 'fs'
 import { writeFile } from 'fs'
 import { RegisteredTapplet, TappletsRegistry } from './types/tapp-registry'
 import { SemVerVersion } from '@metamask/utils'
+import { TappletCandidate } from './types/tapplet'
 
 export function addTappletToRegistry(manifestVersion: string): void {
-  // Read the contents of the JSON file
+  // Read the content of the tapplet manifest to be registered
+  const tapplet: TappletCandidate = JSON.parse(
+    fs.readFileSync('src/tapplets/tapplet.manifest.json', 'utf8')
+  )
+
+  // Read the content of the current registry JSON file
   const registry: TappletsRegistry = JSON.parse(
     fs.readFileSync('./tapplets-registry.manifest.json', 'utf8')
   )
 
+  //TODO fill all fileds
   const tappletToRegister: RegisteredTapplet = {
-    id: '@MCozhusheck/tapplet-example',
+    id: tapplet.packageName,
     metadata: {
-      packageName: 'tapp-example',
-      displayName: 'Example tapplet to test the registry',
+      packageName: tapplet.packageName, //TODO do we need this if its the same as ID?
+      displayName: tapplet.displayName,
       author: {
         name: 'Author Name',
         website: ''
@@ -25,14 +32,13 @@ export function addTappletToRegistry(manifestVersion: string): void {
         }
       ],
       category: 'test',
-      logoPath: 'src/tapplets/@MCozhusheck/tapplet-example/assets/logo.svg'
+      logoPath: `src/tapplets/${tapplet.packageName}/assets/logo.svg`
     },
     versions: {
-      ['0.0.2' as SemVerVersion]: {
-        integrity:
-          'sha512-ivQM1oWaCaZrHARDCD2rib/RFmNDdSDuCQofOsEc3HLo/zgGjLXiySwm/uu3s/5lt9S+/oPC6wFE3m5agzdizA==',
-        registryUrl:
-          'https://registry.npmjs.org/tapplet-example/-/tapplet-example-0.0.2.tgz'
+      [tapplet.version as SemVerVersion]: {
+        //TODO calculate/check integrity
+        integrity: 'sha512-test123test123test123==',
+        registryUrl: `${tapplet.source.location.npm.registry}/${tapplet.packageName}/-/${tapplet.packageName}-${tapplet.version}.tgz`
       }
     }
   }
