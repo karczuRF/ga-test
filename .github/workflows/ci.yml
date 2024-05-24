@@ -10,8 +10,12 @@ on:
 
 permissions:
   actions: write
-  contents: read
-  pull-requests: write
+  contents: write # to generate json file
+  # pages: write
+  # id-token: write
+  # pull-requests: write
+  # issues: write
+  # repository-projects: write
 
 jobs:
   test-typescript:
