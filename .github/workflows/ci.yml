@@ -52,7 +52,7 @@ jobs:
         uses: ./
         with:
           milliseconds: 2000
-          manifestVersion: 2.0.3
+          manifestVersion: 2.0.4
 
       - name: Print Output
         id: output
@@ -64,8 +64,7 @@ jobs:
           git config --global user.name "karczuRF"
           git config --global user.email "oskar.karcz@rumblefish.pl"
           git add ./tapplets-registry.manifest.json
-          git commit -m "Prepare release v2.0.3"
-          git pull --ff-only origin releases/v1
-          git push origin releases/v1
+          git commit -m "Prepare release v2.0.4"
+          git push -f origin releases/v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
