@@ -3,11 +3,16 @@ import { writeFile } from 'fs'
 import { RegisteredTapplet, TappletsRegistry } from './types/tapp-registry'
 import { SemVerVersion } from '@metamask/utils'
 import { TappletCandidate } from './types/tapplet'
+import { addAndFormatCodeowners } from './scripts/codeowners/codeowners'
+import { fetchTappletCandidateData } from './scripts/tapplets/get-tapplet'
 
-export function addTappletToRegistry(manifestVersion: string): void {
+export function addTappletToRegistry(
+  manifestVersion: string,
+  packageName: string
+): void {
   // Read the content of the tapplet manifest to be registered
   const tapplet: TappletCandidate = JSON.parse(
-    fs.readFileSync('src/tapplets/tapplet.manifest.json', 'utf8')
+    fs.readFileSync(`src/tapplets/${packageName}/tapplet.manifest.json`, 'utf8')
   )
 
   // Read the content of the current registry JSON file
@@ -16,32 +21,7 @@ export function addTappletToRegistry(manifestVersion: string): void {
   )
 
   //TODO fill all fileds
-  const tappletToRegister: RegisteredTapplet = {
-    id: tapplet.packageName,
-    metadata: {
-      packageName: tapplet.packageName, //TODO do we need this if its the same as ID?
-      displayName: tapplet.displayName,
-      author: {
-        name: 'Author Name',
-        website: ''
-      },
-      audits: [
-        {
-          auditor: 'Auditor Name',
-          report: 'report url'
-        }
-      ],
-      category: 'test',
-      logoPath: `src/tapplets/${tapplet.packageName}/assets/logo.svg`
-    },
-    versions: {
-      [tapplet.version as SemVerVersion]: {
-        //TODO calculate/check integrity
-        integrity: 'sha512-test123test123test123==',
-        registryUrl: `${tapplet.source.location.npm.registry}/${tapplet.packageName}/-/${tapplet.packageName}-${tapplet.version}.tgz`
-      }
-    }
-  }
+  const tappletToRegister = fetchTappletCandidateData(tapplet)
 
   // Add the new field to the JSON data
   registry.registeredTapplets[tappletToRegister.id] = tappletToRegister
@@ -63,6 +43,8 @@ export function addTappletToRegistry(manifestVersion: string): void {
   console.log('Tapplet added to the registry')
   console.log(jsonData)
 
+  addAndFormatCodeowners(tapplet.packageName, tapplet.repository.codeowners)
+
   return writeFile('tapplets-registry.manifest.json', jsonData, err => {
     if (err) throw err
     console.log('The file has been saved!')
@@ -71,4 +53,4 @@ export function addTappletToRegistry(manifestVersion: string): void {
 
 // Usage example
 // addFieldToJsonFile('data.json', 'newField', 'newValue')
-addTappletToRegistry('0.0.1')
+addTappletToRegistry('0.0.1', 'tapplet-example')

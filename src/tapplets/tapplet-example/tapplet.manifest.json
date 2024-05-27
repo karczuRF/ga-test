@@ -1,5 +1,5 @@
 {
-  "packageName": "tapp-example",
+  "packageName": "@karczuRF/tapplet-example",
   "version": "0.1.0",
   "displayName": "Tapplet human readable name",
   "status": "MVP",
@@ -13,7 +13,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/karczuRF/tapp-example.git"
+    "url": "https://github.com/karczuRF/tapp-example.git",
+    "codeowners": ["@karczuRF", "@MCozhusheck"]
   },
   "source": {
     "location": {

@@ -1,5 +1,5 @@
 {
-  "manifestVersion": "",
+  "manifestVersion": "0.0.1",
   "registeredTapplets": {
     "@karczuRF/tapp-example": {
       "id": "@karczuRF/tapp-example",
@@ -51,14 +51,18 @@
         }
       }
     },
-    "tapp-example": {
-      "id": "tapp-example",
+    "tapplet-example": {
+      "id": "tapplet-example",
       "metadata": {
-        "packageName": "tapp-example",
+        "packageName": "tapplet-example",
         "displayName": "Tapplet human readable name",
         "author": {
           "name": "Author Name",
-          "website": ""
+          "website": "",
+          "codeowners": [
+            "@karczuRF",
+            "@MCozhusheck"
+          ]
         },
         "audits": [
           {
@@ -67,12 +71,41 @@
           }
         ],
         "category": "test",
-        "logoPath": "src/tapplets/tapp-example/assets/logo.svg"
+        "logoPath": "src/tapplets/tapplet-example/assets/logo.svg"
       },
       "versions": {
         "0.1.0": {
           "integrity": "sha512-test123test123test123==",
-          "registryUrl": "https://registry.npmjs.org//tapp-example/-/tapp-example-0.1.0.tgz"
+          "registryUrl": "https://registry.npmjs.org//tapplet-example/-/tapplet-example-0.1.0.tgz"
+        }
+      }
+    },
+    "@karczuRF/tapplet-example": {
+      "id": "@karczuRF/tapplet-example",
+      "metadata": {
+        "packageName": "@karczuRF/tapplet-example",
+        "displayName": "Tapplet human readable name",
+        "author": {
+          "name": "Author Name",
+          "website": "",
+          "codeowners": [
+            "@karczuRF",
+            "@MCozhusheck"
+          ]
+        },
+        "audits": [
+          {
+            "auditor": "Auditor Name",
+            "report": "report url"
+          }
+        ],
+        "category": "test",
+        "logoPath": "src/tapplets/@karczuRF/tapplet-example/assets/logo.svg"
+      },
+      "versions": {
+        "0.1.0": {
+          "integrity": "sha512-test123test123test123==",
+          "registryUrl": "https://registry.npmjs.org//@karczuRF/tapplet-example/-/@karczuRF/tapplet-example-0.1.0.tgz"
         }
       }
     }

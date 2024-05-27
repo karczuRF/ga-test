@@ -51,7 +51,6 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 2000
           manifestVersion: 2.0.4
 
       - name: Print Output

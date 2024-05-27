@@ -19,7 +19,8 @@ const NpmIdStruct = refine(string(), 'Npm ID', value =>
 
 export const AuthorStruct = object({
   name: string(),
-  website: string()
+  website: string(),
+  codeowners: array(string())
 })
 export type Author = Infer<typeof AuthorStruct>
 

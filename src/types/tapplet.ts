@@ -6,7 +6,8 @@ import {
   optional,
   enums,
   Infer,
-  pattern
+  pattern,
+  array
 } from 'superstruct'
 
 export const AssetsPathStruct = pattern(
@@ -28,7 +29,8 @@ export type Design = Infer<typeof DesignStruct>
 
 export const RepositoryStruct = object({
   type: string(),
-  url: string()
+  url: string(),
+  codeowners: array(string())
 })
 export type Repository = Infer<typeof RepositoryStruct>
 
