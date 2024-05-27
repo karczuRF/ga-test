@@ -1,6 +1,7 @@
+import * as core from '@actions/core'
+import * as fs from 'fs'
 import { SemVerVersion } from '@metamask/utils'
-import { PathLike, PathOrFileDescriptor } from 'fs'
-import { RegisteredTapplet } from 'src/types/tapp-registry'
+import { RegisteredTapplet, TappletsRegistry } from 'src/types/tapp-registry'
 import { TappletCandidate } from 'src/types/tapplet'
 
 export function fetchTappletCandidateData(
@@ -35,4 +36,14 @@ export function fetchTappletCandidateData(
   }
 
   return tappletToRegister
+}
+
+export function getTappletCandidate(packageName: string): TappletCandidate {
+  const path = `src/registered-tapplets/${packageName}/tapplet.manifest.json`
+  return JSON.parse(fs.readFileSync(core.toPlatformPath(path), 'utf8'))
+}
+
+export function getTappletRegistry(): TappletsRegistry {
+  const path = './tapplets-registry.manifest.json'
+  return JSON.parse(fs.readFileSync(core.toPlatformPath(path), 'utf8'))
 }

@@ -4,21 +4,21 @@ import { RegisteredTapplet, TappletsRegistry } from './types/tapp-registry'
 import { SemVerVersion } from '@metamask/utils'
 import { TappletCandidate } from './types/tapplet'
 import { addAndFormatCodeowners } from './scripts/codeowners/codeowners'
-import { fetchTappletCandidateData } from './scripts/tapplets/get-tapplet'
+import {
+  fetchTappletCandidateData,
+  getTappletCandidate,
+  getTappletRegistry
+} from './scripts/tapplets/get-tapplet'
 
 export function addTappletToRegistry(
   manifestVersion: string,
   packageName: string
 ): void {
   // Read the content of the tapplet manifest to be registered
-  const tapplet: TappletCandidate = JSON.parse(
-    fs.readFileSync(`src/tapplets/${packageName}/tapplet.manifest.json`, 'utf8')
-  )
+  const tapplet: TappletCandidate = getTappletCandidate(packageName)
 
   // Read the content of the current registry JSON file
-  const registry: TappletsRegistry = JSON.parse(
-    fs.readFileSync('./tapplets-registry.manifest.json', 'utf8')
-  )
+  const registry: TappletsRegistry = getTappletRegistry()
 
   //TODO fill all fileds
   const tappletToRegister = fetchTappletCandidateData(tapplet)
