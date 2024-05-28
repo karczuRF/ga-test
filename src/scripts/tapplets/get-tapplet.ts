@@ -34,10 +34,12 @@ export function fetchTappletCandidateData(
 
 export function getTappletCandidate(packageName: string): TappletCandidate {
   const path = `src/registered-tapplets/${packageName}/tapplet.manifest.json`
+  core.debug(`tapplet manifest path ${path}`)
   return JSON.parse(fs.readFileSync(core.toPlatformPath(path), 'utf8'))
 }
 
 export function getTappletRegistry(): TappletsRegistry {
   const path = './tapplets-registry.manifest.json'
+  core.debug(`tapplet-registry manifest path ${path}`)
   return JSON.parse(fs.readFileSync(core.toPlatformPath(path), 'utf8'))
 }

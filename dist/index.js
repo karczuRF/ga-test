@@ -32031,11 +32031,13 @@ function fetchTappletCandidateData(tapplet) {
 exports.fetchTappletCandidateData = fetchTappletCandidateData;
 function getTappletCandidate(packageName) {
     const path = `src/registered-tapplets/${packageName}/tapplet.manifest.json`;
+    core.debug(`tapplet manifest path ${path}`);
     return JSON.parse(fs.readFileSync(core.toPlatformPath(path), 'utf8'));
 }
 exports.getTappletCandidate = getTappletCandidate;
 function getTappletRegistry() {
     const path = './tapplets-registry.manifest.json';
+    core.debug(`tapplet-registry manifest path ${path}`);
     return JSON.parse(fs.readFileSync(core.toPlatformPath(path), 'utf8'));
 }
 exports.getTappletRegistry = getTappletRegistry;
