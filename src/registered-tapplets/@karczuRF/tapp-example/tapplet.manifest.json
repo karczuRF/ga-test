@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "displayName": "Tapplet human readable name",
   "status": "MVP",
+  "category": "food",
+  "author": {
+    "name": "karczuRF",
+    "website": "https://github.com/karczuRF"
+  },
   "about": {
     "summary": "Demo",
     "description": "This is the simplest example of a tapplet."

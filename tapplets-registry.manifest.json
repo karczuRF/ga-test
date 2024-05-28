@@ -7,7 +7,7 @@
         "packageName": "tapp-example",
         "displayName": "Example tapplet to test the registry",
         "author": {
-          "name": "Author Name",
+          "name": "karczuRF",
           "website": "https://github.com/karczuRF"
         },
         "audits": [
@@ -83,29 +83,27 @@
     "@karczuRF/tapplet-example": {
       "id": "@karczuRF/tapplet-example",
       "metadata": {
-        "packageName": "@karczuRF/tapplet-example",
-        "displayName": "Tapplet human readable name",
+        "displayName": "Tapplet v2.5 human readable name",
         "author": {
-          "name": "Author Name",
-          "website": "",
-          "codeowners": [
-            "@karczuRF",
-            "@MCozhusheck"
-          ]
+          "name": "karczuRF",
+          "website": "https://github.com/karczuRF"
         },
-        "audits": [
-          {
-            "auditor": "Auditor Name",
-            "report": "report url"
-          }
+        "codeowners": [
+          "@karczuRF",
+          "@MCozhusheck"
         ],
-        "category": "test",
-        "logoPath": "src/tapplets/@karczuRF/tapplet-example/assets/logo.svg"
+        "audits": [],
+        "category": "defi",
+        "logoPath": "src/registered-tapplets/@karczuRF/tapplet-example/assets/logo.svg"
       },
       "versions": {
         "0.1.0": {
           "integrity": "sha512-test123test123test123==",
           "registryUrl": "https://registry.npmjs.org//@karczuRF/tapplet-example/-/@karczuRF/tapplet-example-0.1.0.tgz"
+        },
+        "0.2.5": {
+          "integrity": "sha512-test123test123test123==",
+          "registryUrl": "https://registry.npmjs.org//@karczuRF/tapplet-example/-/@karczuRF/tapplet-example-0.2.5.tgz"
         }
       }
     }

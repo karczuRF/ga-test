@@ -4,12 +4,12 @@ import {
   record,
   string,
   optional,
-  enums,
   refine,
   Infer,
   pattern,
   array,
-  size
+  size,
+  enums
 } from 'superstruct'
 
 // Validate that each tapplet use an NPM id.
@@ -19,8 +19,7 @@ const NpmIdStruct = refine(string(), 'Npm ID', value =>
 
 export const AuthorStruct = object({
   name: string(),
-  website: string(),
-  codeowners: array(string())
+  website: string()
 })
 export type Author = Infer<typeof AuthorStruct>
 
@@ -46,14 +45,16 @@ const RegisteredTappletVersionStruct = object({
   registryUrl: string() // TODO check url http (like ImagePathStruct)
 })
 
+export const CategoryEnums = enums(['test', 'defi', 'gamefi', 'meme'])
+
 export const RegisteredTappletStruct = object({
   id: NpmIdStruct,
   metadata: object({
-    packageName: string(),
     displayName: string(),
     author: optional(AuthorStruct),
+    codeowners: array(string()),
     audits: optional(array(AuditStruct)),
-    category: optional(enums(['test', 'defi', 'gamefi', 'meme'])),
+    category: optional(CategoryEnums),
     logoPath: ImagePathStruct
   }),
   versions: record(VersionStruct, RegisteredTappletVersionStruct)

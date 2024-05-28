@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import { writeFile } from 'fs'
 import { RegisteredTapplet, TappletsRegistry } from './types/tapp-registry'
-import { SemVerVersion } from '@metamask/utils'
+import { SemVerVersion, assertIsSemVerVersion } from '@metamask/utils'
 import { TappletCandidate } from './types/tapplet'
 import { addAndFormatCodeowners } from './scripts/codeowners/codeowners'
 import {
@@ -9,6 +9,30 @@ import {
   getTappletCandidate,
   getTappletRegistry
 } from './scripts/tapplets/get-tapplet'
+
+export function updateRegisteredTapplet(
+  registry: TappletsRegistry,
+  tappletToRegister: RegisteredTapplet,
+  tappletVersion: string
+): void {
+  // Add the new field to the JSON data
+  if (registry.registeredTapplets[tappletToRegister.id] == undefined) {
+    console.log('dupa doesnt exist')
+    registry.registeredTapplets[tappletToRegister.id] = tappletToRegister
+  } else {
+    console.log('dupa exists')
+
+    // TODO check if version is ok
+    assertIsSemVerVersion(tappletVersion)
+
+    registry.registeredTapplets[tappletToRegister.id].metadata =
+      tappletToRegister.metadata
+
+    registry.registeredTapplets[tappletToRegister.id].versions[
+      tappletVersion as SemVerVersion
+    ] = tappletToRegister.versions[tappletVersion as SemVerVersion]
+  }
+}
 
 export function addTappletToRegistry(
   manifestVersion: string,
@@ -21,10 +45,11 @@ export function addTappletToRegistry(
   const registry: TappletsRegistry = getTappletRegistry()
 
   //TODO fill all fileds
-  const tappletToRegister = fetchTappletCandidateData(tapplet)
+  const tappletToRegister: RegisteredTapplet =
+    fetchTappletCandidateData(tapplet)
 
   // Add the new field to the JSON data
-  registry.registeredTapplets[tappletToRegister.id] = tappletToRegister
+  updateRegisteredTapplet(registry, tappletToRegister, tapplet.version)
 
   // increment version
   // const parts = registry.manifestVersion.split('.')
@@ -37,11 +62,7 @@ export function addTappletToRegistry(
   registry.manifestVersion = manifestVersion
   console.log('manifestVersion: ', registry.manifestVersion)
 
-  // // Write the updated JSON data back to the file
-  // fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2))
   const jsonData = JSON.stringify(registry, null, 2)
-  console.log('Tapplet added to the registry')
-  console.log(jsonData)
 
   addAndFormatCodeowners(tapplet.packageName, tapplet.repository.codeowners)
 

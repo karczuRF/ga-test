@@ -9,6 +9,7 @@ import {
   pattern,
   array
 } from 'superstruct'
+import { AuthorStruct, CategoryEnums } from './tapp-registry'
 
 export const AssetsPathStruct = pattern(
   string(),
@@ -42,11 +43,15 @@ export const SourceStruct = object({
   location: record(enums(['npm']), LocationStruct)
 })
 
+export const StatusEnums = enums(['WIP', 'MVP', 'PROD'])
+
 export const TappletCandidateStruct = object({
   packageName: string(),
   displayName: string(),
   version: string(),
-  status: optional(enums(['WIP', 'MVP', 'PROD'])),
+  status: optional(StatusEnums),
+  category: optional(CategoryEnums),
+  author: optional(AuthorStruct),
   about: AboutStruct,
   design: DesignStruct,
   repository: RepositoryStruct,

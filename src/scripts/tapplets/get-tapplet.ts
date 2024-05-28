@@ -7,30 +7,24 @@ import { TappletCandidate } from 'src/types/tapplet'
 export function fetchTappletCandidateData(
   tapplet: TappletCandidate
 ): RegisteredTapplet {
+  const tappLogoPath = `src/registered-tapplets/${tapplet.packageName}/assets/logo.svg`
+  const tappRegistryUrl = `${tapplet.source.location.npm.registry}/${tapplet.packageName}/-/${tapplet.packageName}-${tapplet.version}.tgz`
+
   const tappletToRegister: RegisteredTapplet = {
     id: tapplet.packageName,
     metadata: {
-      packageName: tapplet.packageName, //TODO do we need this if its the same as ID?
       displayName: tapplet.displayName,
-      author: {
-        name: 'Author Name',
-        website: '',
-        codeowners: tapplet.repository.codeowners
-      },
-      audits: [
-        {
-          auditor: 'Auditor Name',
-          report: 'report url'
-        }
-      ],
-      category: 'test',
-      logoPath: `src/tapplets/${tapplet.packageName}/assets/logo.svg`
+      author: tapplet.author,
+      codeowners: tapplet.repository.codeowners,
+      audits: [],
+      category: tapplet.category,
+      logoPath: core.toPlatformPath(tappLogoPath)
     },
     versions: {
       [tapplet.version as SemVerVersion]: {
         //TODO calculate/check integrity
         integrity: 'sha512-test123test123test123==',
-        registryUrl: `${tapplet.source.location.npm.registry}/${tapplet.packageName}/-/${tapplet.packageName}-${tapplet.version}.tgz`
+        registryUrl: tappRegistryUrl
       }
     }
   }
