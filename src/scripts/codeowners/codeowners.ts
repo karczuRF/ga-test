@@ -96,7 +96,7 @@ export function writeToFile(
 export function addAndFormatCodeowners(
   packageName: string,
   codeowners: string[]
-) {
+): void {
   try {
     let currentCodeowners = getFileContents()
     if (currentCodeowners.length === 0) {

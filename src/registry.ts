@@ -1,4 +1,3 @@
-import * as fs from 'fs'
 import { writeFile } from 'fs'
 import { RegisteredTapplet, TappletsRegistry } from './types/tapp-registry'
 import { SemVerVersion, assertIsSemVerVersion } from '@metamask/utils'
@@ -16,21 +15,17 @@ export function updateRegisteredTapplet(
   tappletVersion: string
 ): void {
   // Add the new field to the JSON data
-  if (registry.registeredTapplets[tappletToRegister.id] == undefined) {
-    console.log('dupa doesnt exist')
+  if (registry.registeredTapplets[tappletToRegister.id] === undefined) {
     registry.registeredTapplets[tappletToRegister.id] = tappletToRegister
   } else {
-    console.log('dupa exists')
-
     // TODO check if version is ok
     assertIsSemVerVersion(tappletVersion)
 
     registry.registeredTapplets[tappletToRegister.id].metadata =
       tappletToRegister.metadata
 
-    registry.registeredTapplets[tappletToRegister.id].versions[
-      tappletVersion as SemVerVersion
-    ] = tappletToRegister.versions[tappletVersion as SemVerVersion]
+    registry.registeredTapplets[tappletToRegister.id].versions[tappletVersion] =
+      tappletToRegister.versions[tappletVersion]
   }
 }
 
