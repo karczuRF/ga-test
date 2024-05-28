@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import * as fs from 'fs'
 import { SemVerVersion } from '@metamask/utils'
-import { RegisteredTapplet, TappletsRegistry } from 'src/types/tapp-registry'
 import { TappletCandidate } from 'src/types/tapplet'
+import { RegisteredTapplet, TappletsRegistry } from 'src/types/tapp-registry'
 
 export function fetchTappletCandidateData(
   tapplet: TappletCandidate

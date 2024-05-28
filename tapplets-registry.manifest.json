@@ -59,7 +59,10 @@
         "author": {
           "name": "Author Name",
           "website": "",
-          "codeowners": ["@karczuRF", "@MCozhusheck"]
+          "codeowners": [
+            "@karczuRF",
+            "@MCozhusheck"
+          ]
         },
         "audits": [
           {
@@ -85,7 +88,10 @@
           "name": "karczuRF",
           "website": "https://github.com/karczuRF"
         },
-        "codeowners": ["@karczuRF", "@MCozhusheck"],
+        "codeowners": [
+          "@karczuRF",
+          "@MCozhusheck"
+        ],
         "audits": [],
         "category": "defi",
         "logoPath": "src/registered-tapplets/@karczuRF/tapplet-example/assets/logo.svg"

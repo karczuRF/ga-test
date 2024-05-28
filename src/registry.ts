@@ -1,6 +1,6 @@
 import { writeFile } from 'fs'
 import { RegisteredTapplet, TappletsRegistry } from './types/tapp-registry'
-import { SemVerVersion, assertIsSemVerVersion } from '@metamask/utils'
+import { assertIsSemVerVersion } from '@metamask/utils'
 import { TappletCandidate } from './types/tapplet'
 import { addAndFormatCodeowners } from './scripts/codeowners/codeowners'
 import {
@@ -67,7 +67,6 @@ export function addTappletToRegistry(
         `Error writing file: ${err.message} (file: tapplets-registry.manifest.json, data: ${jsonData})`
       )
     }
-    console.log('The file has been saved!')
     return true
   })
 }
