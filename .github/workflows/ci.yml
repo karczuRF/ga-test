@@ -13,25 +13,25 @@ permissions:
   contents: write # to generate json file
 
 jobs:
-  # test-typescript:
-  #   name: TypeScript Tests
-  #   runs-on: ubuntu-latest
+  test-typescript:
+    name: TypeScript Tests
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout
-  #       id: checkout
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
 
-  #     - name: Setup Node.js
-  #       id: setup-node
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version-file: .node-version
-  #         cache: npm
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
 
-  #     - name: Install Dependencies
-  #       id: npm-ci
-  #       run: npm ci
+      - name: Install Dependencies
+        id: npm-ci
+        run: npm ci
 
   test-action:
     name: Registry Test
