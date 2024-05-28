@@ -98,7 +98,7 @@ export function addAndFormatCodeowners(
   codeowners: string[]
 ) {
   try {
-    const currentCodeowners = getFileContents()
+    let currentCodeowners = getFileContents()
     if (currentCodeowners.length === 0) {
       const errorMsg = 'No CODEOWNERS file(s) found.'
       core.error(errorMsg)
@@ -112,8 +112,16 @@ export function addAndFormatCodeowners(
             packageName.endsWith('/') ? ' ' : '/ '
           )
           const codeownerFilePattern = packageDir.concat(codeowners.join(' '))
-          fileContents.contents =
-            fileContents.contents.concat(codeownerFilePattern)
+          if (fileContents.contents.includes(packageDir)) {
+            const replacedContent = fileContents.contents.replace(
+              new RegExp(`^${packageDir}.*$`, 'gm'),
+              codeownerFilePattern
+            )
+            fileContents.contents = replacedContent
+          } else {
+            fileContents.contents =
+              fileContents.contents.concat(codeownerFilePattern)
+          }
         }
 
         return formatContents(fileContents)
@@ -121,6 +129,9 @@ export function addAndFormatCodeowners(
     )
 
     const changedFiles: string[] = []
+
+    // TODO double check if any difference
+    currentCodeowners = getFileContents()
 
     formattedCodeowners.forEach((fileContents, index) => {
       if (currentCodeowners[index].contents !== fileContents.contents) {
@@ -142,9 +153,4 @@ export function addAndFormatCodeowners(
     core.setOutput('success', false)
     core.setFailed(error.message)
   }
-}
-
-// TODO REMOVE
-if (process.env.NODE_ENV !== 'test') {
-  addAndFormatCodeowners('', [])
 }

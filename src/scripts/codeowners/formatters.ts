@@ -23,8 +23,6 @@ export class LinedUpFormatter extends LineFormatter {
     }
 
     const [path, ...owners] = line.trim().split(/\s+/).filter(String)
-    console.log(path)
-    console.log(maxLength)
     const newPath = path.padEnd(maxLength, ' ')
     const formattedOwners = owners.join(' ')
 
