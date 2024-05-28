@@ -17,7 +17,7 @@
           }
         ],
         "category": "test",
-        "logoPath": "src/tapplets/@karczuRF/tapp-example/assets/tari.svg"
+        "logoPath": "src/registered-tapplets/@karczuRF/tapp-example/assets/tari.svg"
       },
       "versions": {
         "1.0.1": {
@@ -42,7 +42,7 @@
           }
         ],
         "category": "test",
-        "logoPath": "src/tapplets/@MCozhusheck/tapplet-example/assets/logo.svg"
+        "logoPath": "src/registered-tapplets/@MCozhusheck/tapplet-example/assets/logo.svg"
       },
       "versions": {
         "0.0.2": {
@@ -59,10 +59,7 @@
         "author": {
           "name": "Author Name",
           "website": "",
-          "codeowners": [
-            "@karczuRF",
-            "@MCozhusheck"
-          ]
+          "codeowners": ["@karczuRF", "@MCozhusheck"]
         },
         "audits": [
           {
@@ -71,7 +68,7 @@
           }
         ],
         "category": "test",
-        "logoPath": "src/tapplets/tapplet-example/assets/logo.svg"
+        "logoPath": "src/registered-tapplets/tapplet-example/assets/logo.svg"
       },
       "versions": {
         "0.1.0": {
@@ -88,10 +85,7 @@
           "name": "karczuRF",
           "website": "https://github.com/karczuRF"
         },
-        "codeowners": [
-          "@karczuRF",
-          "@MCozhusheck"
-        ],
+        "codeowners": ["@karczuRF", "@MCozhusheck"],
         "audits": [],
         "category": "defi",
         "logoPath": "src/registered-tapplets/@karczuRF/tapplet-example/assets/logo.svg"

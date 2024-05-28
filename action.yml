@@ -18,8 +18,8 @@ inputs:
 
 # Define your outputs here.
 outputs:
-  time:
-    description: 'Your output description here'
+  status:
+    description: 'Status of tapplet registration process'
 
 runs:
   using: node20
