@@ -67,12 +67,10 @@ jobs:
         id: make-commit
         run: |
           git config --global user.name "karczuRF"
-          git config --global user.email "oskar.karcz@rumblefish.pl"
+          git config --global user.email "${{ secrets.EMAIL }}"
           git add ./tapplets-registry.manifest.json
           git commit -m "Prepare release v2.0.4"
-          git pull origin releases/v1
-          git push origin HEAD:releases/v1
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          EMAIL: ${{ secrets.EMAIL }}
