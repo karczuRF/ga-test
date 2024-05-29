@@ -32030,7 +32030,7 @@ function fetchTappletCandidateData(tapplet) {
 }
 exports.fetchTappletCandidateData = fetchTappletCandidateData;
 function getTappletCandidate(packageName) {
-    const path = core.toPlatformPath(`src/registered-tapplets/${packageName}/tapplet.manifest.json`);
+    const path = core.toPlatformPath(`./src/registered-tapplets/${packageName}/tapplet.manifest.json`);
     core.notice(`tapplet manifest path ${path}`);
     const tappData = fs.readFileSync(path, 'utf8');
     return JSON.parse(tappData);
@@ -32038,7 +32038,7 @@ function getTappletCandidate(packageName) {
 exports.getTappletCandidate = getTappletCandidate;
 function getTappletRegistry() {
     const path = core.toPlatformPath('tapplets-registry.manifest.json');
-    core.notice(`tapplet-registry manifest path ${path}`);
+    core.notice(`./tapplet-registry manifest path ${path}`);
     const tappData = fs.readFileSync(path, 'utf8');
     return JSON.parse(tappData);
 }
