@@ -31684,7 +31684,7 @@ const registry_1 = __nccwpck_require__(2113);
 async function run() {
     try {
         const packageName = core.getInput('packageName');
-        core.debug(`The ${packageName} tapplet registration process started...`);
+        core.notice(`The ${packageName} tapplet registration process started...`);
         // Add new tapplet to the registry
         const ver = core.getInput('manifestVersion');
         (0, registry_1.addTappletToRegistry)(ver, packageName);
@@ -32030,15 +32030,17 @@ function fetchTappletCandidateData(tapplet) {
 }
 exports.fetchTappletCandidateData = fetchTappletCandidateData;
 function getTappletCandidate(packageName) {
-    const path = `src/registered-tapplets/${packageName}/tapplet.manifest.json`;
+    const path = core.toPlatformPath(`src/registered-tapplets/${packageName}/tapplet.manifest.json`);
     core.debug(`tapplet manifest path ${path}`);
-    return JSON.parse(fs.readFileSync(core.toPlatformPath(path), 'utf8'));
+    const tappData = fs.readFileSync(path, 'utf8');
+    return JSON.parse(tappData);
 }
 exports.getTappletCandidate = getTappletCandidate;
 function getTappletRegistry() {
-    const path = './tapplets-registry.manifest.json';
+    const path = core.toPlatformPath('tapplets-registry.manifest.json');
     core.debug(`tapplet-registry manifest path ${path}`);
-    return JSON.parse(fs.readFileSync(core.toPlatformPath(path), 'utf8'));
+    const tappData = fs.readFileSync(path, 'utf8');
+    return JSON.parse(tappData);
 }
 exports.getTappletRegistry = getTappletRegistry;
 
