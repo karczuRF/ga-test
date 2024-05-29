@@ -1,6 +1,17 @@
 name: CI
 
 on:
+  workflow_dispatch:
+    inputs:
+      packageName:
+        description: 'Tapplet package name'
+        required: false
+        default: 'tapplet-example'
+      manifestVersion:
+        description: version
+        default: '1.0.0'
+        required: false
+
   pull_request:
     branches:
       - main
@@ -49,8 +60,8 @@ jobs:
           manifestVersion: 2.0.4
 
       - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+        id: status
+        run: echo "${{ steps.test-action.outputs.status }}"
 
       - name: Commit manifest
         id: make-commit
