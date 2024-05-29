@@ -1,7 +1,7 @@
 {
   "packageName": "@karczuRF/tapplet-example",
-  "version": "0.2.5",
-  "displayName": "Tapplet v2.5 human readable name",
+  "version": "0.2.6",
+  "displayName": "Tapplet v2.6 human readable name",
   "status": "MVP",
   "category": "defi",
   "author": {
@@ -20,7 +20,7 @@
     "type": "git",
     "url": "https://github.com/karczuRF/tapp-example.git",
     "author": "@karczuRF",
-    "codeowners": ["@karczuRF", "@MCozhusheck"]
+    "codeowners": ["@karczuRF"]
   },
   "source": {
     "location": {

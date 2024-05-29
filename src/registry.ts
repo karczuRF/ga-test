@@ -73,4 +73,4 @@ export function addTappletToRegistry(
 
 // Usage example
 // addFieldToJsonFile('data.json', 'newField', 'newValue')
-addTappletToRegistry('0.0.1', 'tapplet-example')
+addTappletToRegistry('0.0.2', 'tapp-example')

@@ -1,9 +1,9 @@
 {
   "packageName": "tapp-example",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Tapplet human readable name",
   "status": "MVP",
-  "category": "food",
+  "category": "test",
   "author": {
     "name": "karczuRF",
     "website": "https://github.com/karczuRF"
@@ -19,7 +19,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/karczuRF/tapp-example.git",
-    "codeowners": ["karczuRF"]
+    "codeowners": ["@karczuRF"]
   },
   "source": {
     "location": {

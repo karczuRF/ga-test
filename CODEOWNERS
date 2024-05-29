@@ -1,2 +1,3 @@
 # Repository CODEOWNERS
-@karczuRF/tapplet-example/ @karczuRF @MCozhusheck
+@karczuRF/tapplet-example/ @karczuRF
+tapp-example/              @karczuRF
