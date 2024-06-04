@@ -56,7 +56,10 @@ export async function downloadFile(
   }
 }
 
-export async function extractTarball(tappletPath: string, tappletName: string) {
+export async function extractTarball(
+  tappletPath: string,
+  tappletName: string
+): Promise<void> {
   try {
     const filePath = path.join(tappletPath, `${tappletName}.tar.gz`)
 
@@ -66,33 +69,36 @@ export async function extractTarball(tappletPath: string, tappletName: string) {
         recursive: true
       }
     )
-    console.log('Tarball')
+
     const gunzip = zlib.createGunzip({})
     const extract = tar.extract({
       C: outputDir,
       strip: 1 // strip one level of directory hierarchy from archive
     })
 
-    console.log('Tarball')
     const tarballReadStream = fs.createReadStream(filePath)
-    console.log('Tarball')
 
-    tarballReadStream
-      .pipe(gunzip)
-      .on('error', err => {
-        console.error('Error gunzipping tarball:', err)
-        gunzip.destroy()
-        tarballReadStream.destroy()
-      })
-      .pipe(extract)
-      .on('error', err => {
-        console.error('Error extracting tarball:', err)
-        gunzip.destroy()
-        tarballReadStream.destroy()
-      })
-      .on('finish', () => {
-        console.log('Tarball extracted successfully')
-      })
+    return new Promise((resolve, reject) => {
+      tarballReadStream
+        .pipe(gunzip)
+        .on('error', err => {
+          console.error('Error gunzipping tarball:', err)
+          gunzip.destroy()
+          tarballReadStream.destroy()
+          reject(err)
+        })
+        .pipe(extract)
+        .on('error', err => {
+          console.error('Error extracting tarball:', err)
+          gunzip.destroy()
+          tarballReadStream.destroy()
+          reject(err)
+        })
+        .on('finish', () => {
+          console.log('Tarball extracted successfully')
+          resolve()
+        })
+    })
   } catch (err) {
     console.error(`Error extracting tarball: ${err}`)
   }
