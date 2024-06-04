@@ -38,10 +38,11 @@ export function getTappletCandidate(packageName: string): TappletCandidate {
 
   const manifestPath = path.resolve(
     'src',
-    'registered-tapplets',
+    'tapplet-candidate',
     `${packageName}`,
     'tapplet.manifest.json'
   )
+
   const platformPath = core.toPlatformPath(manifestPath)
   core.notice(`Tapplet manifest dir: ${jsonDir}`)
   core.notice(`Tapplet manifest platformPath: ${platformPath}`)
