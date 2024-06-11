@@ -103,7 +103,7 @@ export async function extractTarball(
   }
 }
 
-export async function downloadAndExtractTarball(
+export async function downloadAndExtractPackage(
   tapplet: TappletCandidate
 ): Promise<void> {
   const tappletPath = `src/${tapplet.packageName}`
