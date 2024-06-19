@@ -18,6 +18,10 @@ on:
           "release-type".'
         required: false
 
+  pull_request:
+    branches:
+      - main
+
 jobs:
   create-release-pr:
     runs-on: ubuntu-latest
