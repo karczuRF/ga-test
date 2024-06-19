@@ -25,11 +25,11 @@ export async function run(): Promise<void> {
     // )
 
     // Add new tapplet to the registry
-    await addTappletToRegistry(tappletCandidate)
+    const manifestVersion = await addTappletToRegistry(tappletCandidate)
     core.notice(`The ${tappletCandidate.displayName} tapplet added to registry`)
 
     // Set outputs for other workflow steps to use
-    core.setOutput('status', true)
+    core.setOutput('NEW_VERSION', manifestVersion)
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)

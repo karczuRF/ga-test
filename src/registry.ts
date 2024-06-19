@@ -32,7 +32,7 @@ export function updateRegisteredTapplet(
 
 export async function addTappletToRegistry(
   tapplet: TappletCandidate
-): Promise<void> {
+): Promise<string> {
   // Read the content of the tapplet manifest to be registered
   // const tapplet: TappletCandidate = getTappletCandidate(packageName)
 
@@ -64,8 +64,8 @@ export async function addTappletToRegistry(
   const minor = parseInt(parts[1])
   let patch = parseInt(parts[2])
   patch = ++patch // Increment the major version
-  registry.manifestVersion = `${major.toString()}.${minor.toString()}.${patch.toString()}`
-
+  let manifestVersion = `${major.toString()}.${minor.toString()}.${patch.toString()}`
+  registry.manifestVersion = manifestVersion
   core.notice(`Registry Manifest version ${registry.manifestVersion}`)
 
   // console.log('manifestVersion: ', registry.manifestVersion)
@@ -81,4 +81,5 @@ export async function addTappletToRegistry(
       )
     }
   })
+  return manifestVersion
 }
