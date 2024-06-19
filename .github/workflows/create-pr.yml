@@ -16,6 +16,7 @@ on:
         description:
           'A specific version to bump to. Mutually exclusive with
           "release-type".'
+        default: '1.0.0'
         required: false
 
   pull_request:
@@ -43,7 +44,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
-      - uses: ./scripts/create-pr.sh
+      - uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
