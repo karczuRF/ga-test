@@ -39,9 +39,8 @@ export async function addTappletToRegistry(
   const registry: TappletsRegistry = getTappletRegistry()
 
   //TODO fill all fileds
-  const tappletToRegister: RegisteredTapplet = fetchTappletCandidateData(
-    tapplet
-  )
+  const tappletToRegister: RegisteredTapplet =
+    fetchTappletCandidateData(tapplet)
 
   // Add the new field to the JSON data
   updateRegisteredTapplet(registry, tappletToRegister, tapplet.version)
