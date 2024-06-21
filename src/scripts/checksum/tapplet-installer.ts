@@ -132,6 +132,9 @@ export async function downloadAndExtractPackage(
       `The integrity mismatch! Calculated (${calculatedIntegrity}) is different from the registry value (${tapplet.source.location.npm.integrity})`
     )
 
+  console.log(
+    `Integrity check success! Calculated (${calculatedIntegrity}) is the same as the registry value (${tapplet.source.location.npm.integrity})`
+  )
   //TODO remove folder after was extracted and checked
   removeFolderRecursive(folderPath)
 

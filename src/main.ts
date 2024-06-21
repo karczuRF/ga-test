@@ -21,9 +21,10 @@ export async function run(): Promise<void> {
     )
     core.notice(`The ${tappletCandidate.displayName} tapplet extracted`)
 
+    // TODO add codeowners
     // Add new tapplet to the registry
-    await addTappletToRegistry(tappletCandidate)
-    core.notice(`The ${tappletCandidate.displayName} tapplet added to registry`)
+    // await addTappletToRegistry(tappletCandidate)
+    // core.notice(`The ${tappletCandidate.displayName} tapplet added to registry`)
 
     // Set outputs for other workflow steps to use
     core.setOutput('status', true)
