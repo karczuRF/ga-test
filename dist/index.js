@@ -28984,16 +28984,11 @@ async function run() {
         const packageName = core.getInput('package-name');
         const packageVersion = core.getInput('package-version');
         core.notice(`The ${packageName} tapplet registration process started...`);
-        // const url: string = core.getInput('package-url')
-        // const downloadPath = path.resolve('src', 'tapplet-candidate')
         // Download the tapplet package and extract to verify the content
         const tappletCandidate = await (0, tapplet_installer_1.downloadAndExtractPackage)(packageName, packageVersion);
         core.notice(`The ${tappletCandidate.displayName} tapplet extracted`);
-        // TODO add codeowners
-        // Add new tapplet to the registry
-        // await addTappletToRegistry(tappletCandidate)
-        // core.notice(`The ${tappletCandidate.displayName} tapplet added to registry`)
         // Set outputs for other workflow steps to use
+        // TODO set output
         core.setOutput('status', true);
     }
     catch (error) {
@@ -29096,7 +29091,6 @@ async function readData(filePath, sha) {
                 }
                 else {
                     const hash = calculateHash(data, sha);
-                    console.log('hash', hash);
                     resolve(hash);
                 }
             });
@@ -29243,8 +29237,6 @@ async function downloadAndExtractPackage(packageName, packageVersion) {
     const folderPath = path_1.default.join(constants_1.SRC_DIR, packageName, packageVersion);
     const manifestPath = path_1.default.join(folderPath, constants_1.MANIFEST_FILE);
     const tarballPath = path_1.default.join(folderPath, `${packageName}.tar.gz`);
-    console.log('tapplet manifest', manifestPath);
-    console.log('tapplet tarball', tarballPath);
     // Read the content of the tapplet manifest to be registered
     const tapplet = (0, get_tapplet_1.getTappletCandidate)(manifestPath);
     await downloadFile(folderPath, tarballPath, tapplet.source.location.npm.distTarball);
@@ -29252,8 +29244,8 @@ async function downloadAndExtractPackage(packageName, packageVersion) {
     // Validate checksum
     const calculatedIntegrity = await (0, hash_calculator_1.getFileIntegrity)(tarballPath);
     if (calculatedIntegrity !== tapplet.source.location.npm.integrity)
-        throw new Error(`The integrity mismatch! Calculated (${calculatedIntegrity}) is different from the registry value (${tapplet.source.location.npm.integrity})`);
-    console.log(`Integrity check success! Calculated (${calculatedIntegrity}) is the same as the registry value (${tapplet.source.location.npm.integrity})`);
+        throw new Error(`The integrity mismatch! Calculated (${calculatedIntegrity}) is different from the value in the manifest (${tapplet.source.location.npm.integrity})`);
+    console.log(`Integrity check success! Calculated (${calculatedIntegrity}) is the same as the value in the manifest (${tapplet.source.location.npm.integrity})`);
     //TODO remove folder after was extracted and checked
     removeFolderRecursive(folderPath);
     return tapplet;

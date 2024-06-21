@@ -10,8 +10,6 @@ export async function run(): Promise<void> {
     const packageName: string = core.getInput('package-name')
     const packageVersion: string = core.getInput('package-version')
     core.notice(`The ${packageName} tapplet registration process started...`)
-    // const url: string = core.getInput('package-url')
-    // const downloadPath = path.resolve('src', 'tapplet-candidate')
 
     // Download the tapplet package and extract to verify the content
     const tappletCandidate = await downloadAndExtractPackage(
@@ -20,12 +18,8 @@ export async function run(): Promise<void> {
     )
     core.notice(`The ${tappletCandidate.displayName} tapplet extracted`)
 
-    // TODO add codeowners
-    // Add new tapplet to the registry
-    // await addTappletToRegistry(tappletCandidate)
-    // core.notice(`The ${tappletCandidate.displayName} tapplet added to registry`)
-
     // Set outputs for other workflow steps to use
+    // TODO set output
     core.setOutput('status', true)
   } catch (error) {
     // Fail the workflow run if an error occurs
