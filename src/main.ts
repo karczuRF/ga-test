@@ -1,5 +1,4 @@
 import * as core from '@actions/core'
-import { addTappletToRegistry } from './registry'
 import { downloadAndExtractPackage } from './scripts/checksum/tapplet-installer'
 
 /**
